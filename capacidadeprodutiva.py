@@ -64,27 +64,27 @@ def desc_inv(descontos, psem, monthnumber):
         
         return descontos
     
-def desc_inicio(descontos, tam, feriado_datas, pinicio, horas, monthnumber, prev_datas):
+def desc_inicio(descontos, tam, feriado_datas, pinicio, horas, monthnumber):
     for i in range(0, tam):
         if descontos[0] > 0 and feriado_datas[i][1] == monthnumber - 1 and feriado_datas[i][2] == calendar._monthlen(date.today().year, monthnumber-1):
             descontos[0] += -pinicio
             
     for i in range(len(descontos)):
-        if descontos[i] > 0 and calendar.weekday(date.today().year, monthnumber, i+1) % 7 == 0 and descontos[prev_datas[i][3] + j-1] != 5:
+        if descontos[i] > 0 and calendar.weekday(date.today().year, monthnumber, i+1) % 7 == 0 and descontos[i] != 5:
           descontos[i] += -pinicio
     
     return descontos
 
-def desc_fim(descontos, pfim, horas, monthnumber, prev_datas):
+def desc_fim(descontos, pfim, horas, monthnumber):
     for i in range(len(descontos)):
-        if descontos[i] > 0 and calendar.weekday(date.today().year, monthnumber, i+1) % 7 != 5 and descontos[prev_datas[i][3] + j-1] != 5:
+        if descontos[i] > 0 and calendar.weekday(date.today().year, monthnumber, i+1) % 7 != 5 and descontos[i] != 5:
             descontos[i] += -pfim
 
     return descontos
 
-def desc_fimsem(descontos, psem, horas, monthnumber, prev_datas):
+def desc_fimsem(descontos, psem, horas, monthnumber):
     for i in range(len(descontos)):
-        if descontos[i] > 0 and calendar.weekday(date.today().year, monthnumber, i+1) % 7 == 5 and descontos[prev_datas[i][3] + j-1] != 5:
+        if descontos[i] > 0 and calendar.weekday(date.today().year, monthnumber, i+1) % 7 == 5 and descontos[i] != 5:
             descontos[i] += -psem
             
     return descontos
@@ -171,8 +171,8 @@ for i in range(no_linhas):
     descontos = desc_feriados(descontos, no_mes, len(feriados), feriados.iloc[:,1:].values, adm_pip.iloc[:,4].values[indices[i]], adm_pip.iloc[:,2].values[indices[i]])
     descontos = desc_inv(descontos, adm_pip.iloc[:,4].values[indices[i]], no_mes)
     if turnos[i] != 4:
-        descontos = desc_inicio(descontos, len(feriados), feriados.iloc[:,1:].values, adm_pip.iloc[:,2].values[indices[i]], horas_disponiveis[i], no_mes, preventivas.iloc[:,3:].values[2*indices[i]:2+2*indices[i]])
-        descontos = desc_fim(descontos, adm_pip.iloc[:,3].values[indices[i]], horas_disponiveis[i], no_mes, preventivas.iloc[:,3:].values[2*indices[i]:2+2*indices[i]])
+        descontos = desc_inicio(descontos, len(feriados), feriados.iloc[:,1:].values, adm_pip.iloc[:,2].values[indices[i]], horas_disponiveis[i], no_mes)
+        descontos = desc_fim(descontos, adm_pip.iloc[:,3].values[indices[i]], horas_disponiveis[i], no_mes)
         descontos = desc_fimsem(descontos, adm_pip.iloc[:,4].values[indices[i]], horas_disponiveis[i], no_mes)
         descontos = desc_domingos(descontos, no_mes)
         descontos = desc_admpip(descontos, adm_pip.iloc[:,1].values[indices[i]], no_mes)
