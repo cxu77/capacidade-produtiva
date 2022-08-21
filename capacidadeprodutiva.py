@@ -187,7 +187,7 @@ for i in range(len(gap_horas)):
         index = np.argmax(gap_horas)
         if turnos[i] < turnos[index]:
             for j in range(len(cal_linhas[0])):
-                if cal_linhas[i][j] > 0 and gap_horas[index] > 0:
+                if cal_linhas[i][j] > 0 and cal_linhas[index][j] > 0 and gap_horas[index] > 0:
                     cal_linhas[i][j] += 6
                     cal_linhas[index][j] -= 6 
                     gap_horas[index] -= 6
