@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-"""
-Spyder Editor
 
-This is a temporary script file.
-"""
 
 import numpy as np
 import pandas as pd
 import calendar
 from datetime import date 
 import streamlit as st
+import requests
+from io import BytesIO
 
 # funcoes
 # criaçao do calendario mensal
@@ -100,12 +97,13 @@ def desc_admpip(descontos, adm, monthnumber):
     return descontos
 
 # leitura dos arquivos necessários
-
-adm_pip = pd.read_excel(r'P:\LYS\Pastas\Projeto - Automatização\bases_capacidade_produtiva.xlsx', sheet_name= 'PIP')
-adm_pip = adm_pip.sort_values(by = ['Linhas'])
-feriados = pd.read_excel(r'P:\LYS\Pastas\Projeto - Automatização\bases_capacidade_produtiva.xlsx', sheet_name= 'FERIADOS')
-preventivas = pd.read_excel(r'P:\LYS\Pastas\Projeto - Automatização\bases_capacidade_produtiva.xlsx', sheet_name= 'PREVENTIVA')
-preventivas = preventivas.sort_values(by = ['Linhas'])
+url = "https://raw.githubusercontent.com/cxu77/capacidade-produtiva/main/bases-capacidade-produtiva.xlsx"
+r = requests.get(url).content
+adm_pip = pd.read_excel(BytesIO(r), sheet_name= 'PIP')
+adm_pip = adm_pip.sort_values(by = ['LINHAS'])
+feriados = pd.read_excel(BytesIO(r), sheet_name= 'Feriados')
+preventivas = pd.read_excel(BytesIO(r), sheet_name= 'Preventiva')
+preventivas = preventivas.sort_values(by = ['LINHAS'])
 
 # codigo fonte
 
