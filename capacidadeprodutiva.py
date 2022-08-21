@@ -202,7 +202,7 @@ if "LB04" in selecao and "LB09" in selecao:
         if cal_linhas[min_index][len(cal_linhas[0]) - 1 - j + i] > 0:
             gap_horas[min_index] -= cal_linhas[min_index][len(cal_linhas[0]) - 1 - j + i]
             cal_linhas[min_index][len(cal_linhas[0]) - 1- j + i] = 0
-        
+st.write(j)        
 for i in range(len(gap_horas)):
     if gap_horas[i] < 0:
         index = np.argmax(gap_horas)
