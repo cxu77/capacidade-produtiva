@@ -128,7 +128,6 @@ for i in range(no_linhas):
         if selecao[i] == opcoes[j]:
             indices.append(j)
 
-print(linhas, indices)
 
 turnos = np.zeros(no_linhas)
 horas_disponiveis = np.zeros(no_linhas)
@@ -168,7 +167,7 @@ for i in range(no_linhas):
     capacidade = adm_pip.iloc[:,5].values[indices[i]]
     inicio_mes, dias_mes = cal_mensal(no_mes)
     descontos = np.ones(dias_mes)*horas_disponiveis[i]
-    descontos = desc_preventivas(descontos, no_mes, preventivas.iloc[:,3:].values[:2+2*indices[i]])
+    descontos = desc_preventivas(descontos, no_mes, preventivas.iloc[:,3:].values[2*[indices[i]]:2+2*indices[i]])
     descontos = desc_feriados(descontos, no_mes, len(feriados), feriados.iloc[:,1:].values, adm_pip.iloc[:,4].values[indices[i]], adm_pip.iloc[:,2].values[indices[i]])
     descontos = desc_inv(descontos, adm_pip.iloc[:,4].values[indices[i]], no_mes)
     if turnos[i] != 4:
