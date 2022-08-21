@@ -193,7 +193,7 @@ if "LB04" in selecao and "LB09" in selecao:
     max_index = max(index_lb04, index_lb09)
     min_index = max(index_lb04, index_lb09)
     for j in range(len(cal_linhas[0])):
-        while gap_horas[max_index] >= 0:
+        if gap_horas[max_index] >= 0:
             if cal_linhas[max_index][len(cal_linhas[0]) -1 - j] > 0:
                 gap_horas[max_index] -= cal_linhas[max_index][len(cal_linhas[0]) - 1 - j]
                 cal_linhas[max_index][len(cal_linhas[0]) -1 -  j] = 0
