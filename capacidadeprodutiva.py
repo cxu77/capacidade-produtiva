@@ -127,6 +127,10 @@ for i in range(no_linhas):
     for j in range(len(opcoes)):
         if selecao[i] == opcoes[j]:
             indices.append(j)
+            if selecao[i] == "LB04":
+                index_lb04 = i
+            elif selecao[i] == "LB09":
+                index_lb09 = i
 
 
 turnos = np.zeros(no_linhas)
@@ -185,24 +189,21 @@ for i in range(no_linhas):
     gap_horas[i] = 1000*(c_produtiva[i] - demanda[i])/capacidade
     cal_linhas.append(descontos)
 
-try:
-    index_lb04 = selecao.index("LB04")
-    index_lb09 = selecao.index("LB09")
+
+
+if "LB04" in selecao and "LB09" in selecao:
     max_index = max(index_lb04, index_lb09)
-    min_index = min(index_lb04, index_lb09)
-except:
-    index_lb04, index_lb09 = 0
-
-for j in range(len(cal_linhas[0])):
-    while gap_horas[max_index] >= 0:
-        if cal_linhas[max_index][len(cal_linhas[0]) -j] > 0:
-            gap_horas[max_index] -= cal_linhas[max_index][len(cal_linhas[0]) - j]
-            cal_linhas[max_index][len(cal_linhas[0]) - j] = 0
-
-for i in range(len(cal_linhas[0]) - j, -1):
-    if cal_linhas[min_index][len(cal_linhas[0]) - j + i] > 0:
-        gap_horas[min_index] -= cal_linhas[min_index][len(cal_linhas[0]) - j + i]
-        cal_linhas[max_index][len(cal_linhas[0]) - j + i] = 0
+    min_index = max(index_lb04, index_lb09)
+    for j in range(len(cal_linhas[0])):
+        while gap_horas[max_index] >= 0:
+            if cal_linhas[max_index][len(cal_linhas[0]) -j] > 0:
+                gap_horas[max_index] -= cal_linhas[max_index][len(cal_linhas[0]) - j]
+                cal_linhas[max_index][len(cal_linhas[0]) - j] = 0
+    
+    for i in range(len(cal_linhas[0]) - j, -1):
+        if cal_linhas[min_index][len(cal_linhas[0]) - j + i] > 0:
+            gap_horas[min_index] -= cal_linhas[min_index][len(cal_linhas[0]) - j + i]
+            cal_linhas[max_index][len(cal_linhas[0]) - j + i] = 0
         
 for i in range(len(gap_horas)):
     if gap_horas[i] < 0:
