@@ -199,7 +199,7 @@ if "LB04" in selecao and "LB09" in selecao:
                 k = j
 
 
-    for i in range(k, len(cal_linhas[0])):
+    for i in range(k):
         if cal_linhas[max_index][i] > 0:
             gap_horas[max_index] -= cal_linhas[max_index][i]
             cal_linhas[max_index][i] = 0
