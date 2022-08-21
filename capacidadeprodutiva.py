@@ -133,6 +133,9 @@ turnos = np.zeros(no_linhas)
 horas_disponiveis = np.zeros(no_linhas)
 demanda = np.zeros(no_linhas)
 col1, col2 = st.columns(2)    
+demanda_49 = 0
+percent_lb4 = 0
+percent_lb9 = 0
 
 with col1:
     with st.form("inputs-de-demanda"):
@@ -182,6 +185,23 @@ for i in range(no_linhas):
     gap_horas[i] = 1000*(c_produtiva[i] - demanda[i])/capacidade
     cal_linhas.append(descontos)
 
+
+index_lb04 = selecao.index("LB04")
+index_lb09 = selecao.index("LB09")
+max_index = max(index_lb04, index_lb09)
+min_index = min(index_lb04, index_lb09)
+
+for j in range(len(cal_linhas[0])):
+    while gap_horas[max_index] >= 0:
+        if cal_linhas[max_index][len(cal_linhas[0]) -j] > 0:
+            gap_horas[max_index] -= cal_linhas[max_index][len(cal_linhas[0]) - j]
+            cal_linhas[max_index][len(cal_linhas[0]) - j] = 0
+
+for i in range(len(cal_linhas[0]) - j, -1):
+    if cal_linhas[min_index][len(cal_linhas[0]) - j + i] > 0:
+        gap_horas[min_index] -= cal_linhas[min_index][len(cal_linhas[0]) - j + i]
+        cal_linhas[max_index][len(cal_linhas[0]) - j + i] = 0
+        
 for i in range(len(gap_horas)):
     if gap_horas[i] < 0:
         index = np.argmax(gap_horas)
