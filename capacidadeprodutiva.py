@@ -204,7 +204,7 @@ if "LB04" in selecao and "LB09" in selecao:
         gap_horas[min_index] -= cal_linhas[min_index][i]
         cal_linhas[min_index][i] = 0
  
-st.write(j)
+
 for i in range(len(gap_horas)):
     if gap_horas[i] < 0:
         index = np.argmax(gap_horas)
@@ -251,7 +251,9 @@ for i in range(0, no_linhas):
         for j in range(len(cal_linhas[0])):
             if cal_linhas[i][j] == 0:
                 cal_linhas[i][j] = horas_disponiveis[i] - adm_pip.iloc[:,3].values[indices[i]] - adm_pip.iloc[:,2].values[indices[i]] - adm_pip.iloc[:,1].values[indices[i]]
-
+                gap_horas[i][j] += cal_linhas[i][j]
+                if gap_horas[i] >= 0:
+                    break
 
 for i in range(no_linhas):
     st.write('Calendário da linha ' + selecao[i])
