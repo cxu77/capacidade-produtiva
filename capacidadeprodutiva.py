@@ -193,18 +193,18 @@ if "LB04" in selecao and "LB09" in selecao:
     max_index = max(index_lb04, index_lb09)
     min_index = min(index_lb04, index_lb09)
     for j in range(len(cal_linhas[0])):
-        if gap_horas[max_index] >= 0:
-            if cal_linhas[max_index][len(cal_linhas[0]) -1 - j] > 0:
-                gap_horas[max_index] -= cal_linhas[max_index][len(cal_linhas[0]) - 1 - j]
-                cal_linhas[max_index][len(cal_linhas[0]) -1 -  j] = 0
-                if gap_horas[max_index] < 0:
-                    break
+        if gap_horas[min_index] >= 0:
+            if cal_linhas[min_index][len(cal_linhas[0]) -1 - j] > 0:
+                gap_horas[min_index] -= cal_linhas[min_index][len(cal_linhas[0]) - 1 - j]
+                cal_linhas[min_index][len(cal_linhas[0]) -1 -  j] = 0
+                k = j
 
-    for i in range(len(cal_linhas[0]) - j, -1):
-        if cal_linhas[min_index][len(cal_linhas[0]) - 1 - j + i] > 0:
-            gap_horas[min_index] -= cal_linhas[min_index][len(cal_linhas[0]) - 1 - j + i]
-            cal_linhas[min_index][len(cal_linhas[0]) - 1- j + i] = 0
-st.write(j)        
+
+    for i in range(len(cal_linhas[0]) - k):
+        if cal_linhas[max_index][len(cal_linhas[0]) - 1 - k - i] > 0:
+            gap_horas[max_index] -= cal_linhas[max_index][len(cal_linhas[0]) - 1 - k - i]
+            cal_linhas[max_index][len(cal_linhas[0]) - 1- k - i] = 0
+        
 for i in range(len(gap_horas)):
     if gap_horas[i] < 0:
         index = np.argmax(gap_horas)
@@ -252,8 +252,8 @@ for i in range(0, no_linhas):
             if cal_linhas[i][j] == 0:
                 cal_linhas[i][j] = horas_disponiveis[i] - adm_pip.iloc[:,3].values[indices[i]] - adm_pip.iloc[:,2].values[indices[i]] - adm_pip.iloc[:,1].values[indices[i]]
 
+
 st.write(index_lb04, index_lb09)
-st.write(min_index, max_index)
 for i in range(no_linhas):
     st.write('Calendário da linha ' + selecao[i])
     st.write('Gap de horas: %.2f' % gap_horas[i])
