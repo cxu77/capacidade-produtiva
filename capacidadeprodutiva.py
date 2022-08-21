@@ -198,7 +198,7 @@ for i in range(len(gap_horas)):
                         
         elif turnos[i] == turnos[index]:
             for j in range(len(cal_linhas[0])):
-                if cal_linhas[i][j] > 0 and gap_horas[index] > 0:
+                if cal_linhas[i][j] > 0 and cal_linhas[index][j] > 0 and gap_horas[index] > 0:
                     k = 24 - cal_linhas[i][j]
                     cal_linhas[i][j] += k
                     cal_linhas[index][j] -= k 
@@ -209,7 +209,7 @@ for i in range(len(gap_horas)):
                         
         else:
             for j in range(len(cal_linhas[0])):
-                if cal_linhas[i][j] > 0 and gap_horas[index] > 0:
+                if cal_linhas[i][j] > 0 and cal_linhas[index][j] > 0 and gap_horas[index] > 0:
                     k =  24 - cal_linhas[i][j]
                     cal_linhas[i][j] += k
                     cal_linhas[index][j] -= 6
