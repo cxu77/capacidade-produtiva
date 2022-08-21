@@ -185,11 +185,13 @@ for i in range(no_linhas):
     gap_horas[i] = 1000*(c_produtiva[i] - demanda[i])/capacidade
     cal_linhas.append(descontos)
 
-
-index_lb04 = selecao.index("LB04")
-index_lb09 = selecao.index("LB09")
-max_index = max(index_lb04, index_lb09)
-min_index = min(index_lb04, index_lb09)
+try:
+    index_lb04 = selecao.index("LB04")
+    index_lb09 = selecao.index("LB09")
+    max_index = max(index_lb04, index_lb09)
+    min_index = min(index_lb04, index_lb09)
+except:
+    index_lb04, index_lb09 = 0
 
 for j in range(len(cal_linhas[0])):
     while gap_horas[max_index] >= 0:
