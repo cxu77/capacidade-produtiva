@@ -251,7 +251,7 @@ for i in range(0, no_linhas):
                 cal_linhas[i][j] = horas_disponiveis[i] - adm_pip.iloc[:,3].values[indices[i]] - adm_pip.iloc[:,2].values[indices[i]] - adm_pip.iloc[:,1].values[indices[i]]
 
 
-st.write(index_lb04, index_lb09)
+st.write(k)
 for i in range(no_linhas):
     st.write('Calendário da linha ' + selecao[i])
     st.write('Gap de horas: %.2f' % gap_horas[i])
