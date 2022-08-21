@@ -192,15 +192,16 @@ if "LB04" in selecao and "LB09" in selecao:
     index_lb09 = selecao.index("LB09")
     max_index = max(index_lb04, index_lb09)
     min_index = min(index_lb04, index_lb09)
-    j = 0 
+    j = 0  
     while gap_horas[min_index] >= 0 or j < len(cal_linhas[0]):
-        if cal_linhas[min_index][len(cal_linhas[0]) - 1 - j] > 0:
-            if gap_horas[min_index] - cal_linhas[min_index][len(cal_linhas[0]) - 1 - j] < 0:
-                break
-            else:
-                gap_horas[min_index] -= cal_linhas[min_index][len(cal_linhas[0]) - 1 - j]
-                cal_linhas[min_index][len(cal_linhas[0]) - 1 - j] = 0
-                p = j
+        if cal_linhas[min_index][len(cal_linhas[0]) - 1 - j] > 0 and gap_horas[min_index] - cal_linhas[min_index][len(cal_linhas[0]) - 1 - j] < 0:
+            break
+        elif cal_linhas[min_index][len(cal_linhas[0]) -1 - j] > 0:
+            gap_horas[min_index] -= cal_linhas[min_index][len(cal_linhas[0]) - 1 - j]
+            cal_linhas[min_index][len(cal_linhas[0]) - 1 - j] = 0
+            p = j
+        else:    
+            k = 0
         j+=1
    
     for i in range(p):
