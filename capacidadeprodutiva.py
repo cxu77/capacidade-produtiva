@@ -91,7 +91,7 @@ def desc_fimsem(descontos, psem, horas, monthnumber):
 
 def desc_admpip(descontos, adm, monthnumber):
     for i in range(len(descontos)):
-        if descontos[i] > 0 :
+        if descontos[i] > 0 and descontos[i] != 5:
             descontos[i] += -adm
     
     return descontos
