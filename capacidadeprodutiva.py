@@ -197,7 +197,9 @@ if "LB04" in selecao and "LB09" in selecao:
             if cal_linhas[max_index][len(cal_linhas[0]) -1 - j] > 0:
                 gap_horas[max_index] -= cal_linhas[max_index][len(cal_linhas[0]) - 1 - j]
                 cal_linhas[max_index][len(cal_linhas[0]) -1 -  j] = 0
-    
+                if gap_horas[max_index] < 0:
+                    break
+
     for i in range(len(cal_linhas[0]) - j, -1):
         if cal_linhas[min_index][len(cal_linhas[0]) - 1 - j + i] > 0:
             gap_horas[min_index] -= cal_linhas[min_index][len(cal_linhas[0]) - 1 - j + i]
