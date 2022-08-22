@@ -251,13 +251,13 @@ for i in range(len(gap_horas)):
 for i in range(no_linhas):
     for j in range(len(cal_linhas[0])):
         if cal_linhas[i][j] == -1:
-            cal_linhas[i][j] = cal_linhas[i][j].astype(str)
+            cal_linhas[i][j] = str(cal_linhas[i][j])
             cal_linhas[i][j] = "FERIADO"
         elif cal_linhas[i][j]== -2:
-            cal_linhas[i][j] = cal_linhas[i][j].astype(str)
+            cal_linhas[i][j] = str(cal_linhas[i][j])
             cal_linhas[i][j] = "PREV"
         elif cal_linhas[i][j] == -3:
-            cal_linhas[i][j] = cal_linhas[i][j].astype(str)
+            cal_linhas[i][j] = str(cal_linhas[i][j])
             cal_linhas[i][j] = "INV"
         elif cal_linhas[i][j] == -4:
             cal_linhas[i][j] = 0
