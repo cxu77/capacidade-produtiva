@@ -247,8 +247,8 @@ for i in range(len(gap_horas)):
                         break
                     
 st.write(cal_linhas.dtype)
-cal_linhas[][] = cal_linhas[][].astype('O')
-st.write(cal_linhas[][].dtype)
+cal_linhas = cal_linhas.astype('O')
+st.write(cal_linhas.dtype)
 
 for i in range(no_linhas):
     for j in range(len(cal_linhas[0])):
