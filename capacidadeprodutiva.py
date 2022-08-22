@@ -187,7 +187,7 @@ for i in range(no_linhas):
         descontos = desc_domingos(descontos, no_mes)
         descontos = desc_admpip(descontos, adm_pip.iloc[:,1].values[indices[i]], no_mes)
     else:
-        descontos = desc_4turno(descontos, no_mes)
+        descontos = desc_4turnos(descontos, no_mes)
     hdo[i] = sum(descontos) + (descontos == -1).sum() + 2*(descontos == -2).sum() + 3*(descontos == -3).sum()
     c_produtiva[i] = hdo[i]*capacidade/1000
     gap_horas[i] = 1000*(c_produtiva[i] - demanda[i])/capacidade
