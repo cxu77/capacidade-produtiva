@@ -238,9 +238,13 @@ for i in range(len(gap_horas)):
         else:
             for j in range(len(cal_linhas[0])):
                 if cal_linhas[i][j] > 0 and cal_linhas[index][j] > 0 and gap_horas[index] > 0:
-                    k =  24 - cal_linhas[i][j]
+                    k =  (3-turnos[index])*5
+                    if k == 0:
+                        k = 1
                     cal_linhas[i][j] += k
-                    cal_linhas[index][j] -= 5
+                    cal_linhas[index][j] -= k
+                    if cal_linhas[index][j] < 0:
+                        cal_linhas[index][j] = 0
                     gap_horas[i] += k
                     gap_horas[index] -= 5   
                     if gap_horas[i] >= 0:
