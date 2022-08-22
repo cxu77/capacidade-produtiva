@@ -98,7 +98,7 @@ def desc_admpip(descontos, adm, monthnumber):
 
 def desc_4turnos(descontos, monthnumber):
     for i in range(len(descontos)):
-        if calendar.weekday(date.today().year, monthnumber, i+1) % 7 < 5:
+        if calendar.weekday(date.today().year, monthnumber, i+1) % 7 < 5 and descontos[i] > 0:
             descontos[i] -= 1
         else:
             descontos[i] -= 2
@@ -188,7 +188,7 @@ for i in range(no_linhas):
         descontos = desc_admpip(descontos, adm_pip.iloc[:,1].values[indices[i]], no_mes)
     else:
         descontos = desc_4turnos(descontos, no_mes)
-        
+      
     hdo[i] = sum(descontos) + (descontos == -1).sum() + 2*(descontos == -2).sum() + 3*(descontos == -3).sum()
     c_produtiva[i] = hdo[i]*capacidade/1000
     gap_horas[i] = 1000*(c_produtiva[i] - demanda[i])/capacidade
