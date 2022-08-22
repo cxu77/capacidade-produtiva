@@ -1,5 +1,3 @@
-
-
 import numpy as np
 import pandas as pd
 import calendar
@@ -7,6 +5,7 @@ from datetime import date
 import streamlit as st
 import requests
 from io import BytesIO
+from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 # funcoes
 # criaçao do calendario mensal
@@ -140,9 +139,6 @@ turnos = np.zeros(no_linhas)
 horas_disponiveis = np.zeros(no_linhas)
 demanda = np.zeros(no_linhas)
 col1, col2 = st.columns(2)    
-demanda_49 = 0
-percent_lb4 = 0
-percent_lb9 = 0
 
 with col1:
     with st.form("inputs-de-demanda"):
@@ -189,14 +185,14 @@ for i in range(no_linhas):
     else:
         descontos = desc_4turnos(descontos, no_mes)
     
-    sum1 = (descontos == -1).sum()
+    sum1 = np.count_nonzero(descontos == -1)
     if sum1 is None:
         sum1 = 0
-    sum2 = 2*(descontos == -2).sum()
+    sum2 = 2*np.count_nonzero(descontos == -2)
     if sum1 is None:
         sum2 = 0
-    sum3 = 3*(descontos == -3).sum()
-    if sum3 is None
+    sum3 = 3*np.count_nonzero(descontos == -3)
+    if sum3 is None:
         sum3 = 0
     hdo[i] = sum(descontos) + sum1 + sum2 + sum3
     c_produtiva[i] = hdo[i]*capacidade/1000
@@ -287,8 +283,37 @@ for i in range(no_linhas):
     for j in range(len(cal_linhas[0])):
         if cal_linhas[i][j] == -4:
             cal_linhas[i][j] = 0                   
-                    
-for i in range(no_linhas):
-    st.write('Calendário da linha ' + selecao[i])
-    st.write('Gap de horas: %.2f' % gap_horas[i])
-    st.write(cal_linhas[i])
+
+nome_colunas = []
+for i in range(len(cal_linhas[0])):
+    nome_colunas.append(str(i+1) + "/" + str(no_mes) + "/" + str(date.today().year))
+
+cal = pd.DataFrame(cal_linhas)
+cal.columns = nome_colunas
+cal['Linhas'] = selecao
+coluna1 = cal.pop('Linhas')
+cal.insert(0, 'Linhas', coluna1)
+agregado = []
+agregado.append(cal.sum(axis=1))
+agregado.append(cal.sum(axis=1)/24)
+agregado = pd.DataFrame(agregado)
+agregado.columns = selecao
+agregado['Linhas'] = ['Horas', 'Dias']
+coluna1 = agregado.pop('Linhas')
+agregado.insert(0, 'Linhas', coluna1)
+agregado = agregado.transpose()
+cal.replace(-1, "FERIADO", inplace=True)
+cal.replace(-2, "PREV", inplace=True)
+cal.replace(-3, "INV", inplace = True)
+gb = GridOptionsBuilder.from_dataframe(cal)
+gb.configure_columns(column_names=nome_colunas, editable = True)
+go = gb.build()  
+results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED)
+
+st.write("Gap de horas (em horas e em dias)")
+st.dataframe(agregado)
+#gb = GridOptionsBuilder.from_dataframe(results)
+#gb.configure_default_column(groupable=True, value=True, enableRowGroup=True, aggFunc="sum", editable=False)
+#go = gb.build()
+#AgGrid(results, gridOptions = go, enable_enterprise_modules = True)
+        
