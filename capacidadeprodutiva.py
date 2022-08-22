@@ -235,7 +235,7 @@ for i in range(len(gap_horas)):
                         cal_linhas[index][j] = 0
                     gap_horas[index] -= k
                     gap_horas[i] += cal_linhas[i][j] - p
-                    if gap_horas[i] >= 0 or :
+                    if gap_horas[i] >= 0:
                         break
                         
         else:
