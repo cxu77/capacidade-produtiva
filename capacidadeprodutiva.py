@@ -257,7 +257,7 @@ for i in range(0, no_linhas):
                     break
 
 for i in range(no_linhas):
-    for j in range(cal_linhas[0]):
+    for j in range(len(cal_linhas[0])):
         if cal_linhas[i][j] == -1:
             cal_linhas[i][j] = "FERIADO"
         elif cal_linhas[i][j]== -2:
