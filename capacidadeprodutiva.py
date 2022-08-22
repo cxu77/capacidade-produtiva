@@ -96,6 +96,13 @@ def desc_admpip(descontos, adm, monthnumber):
     
     return descontos
 
+def desc_4turnos(descontos, monthnumber):
+    for i in range(len(descontos)):
+        if calendar.weekday(date.today().year, monthnumber, i+1) % 7 < 5:
+            descontos[i] -= 1
+        else:
+            descontos[i] -= 2
+
 # leitura dos arquivos necessários
 url = "https://raw.githubusercontent.com/cxu77/capacidade-produtiva/main/bases-capacidade-produtiva.xlsx"
 r = requests.get(url).content
@@ -179,7 +186,8 @@ for i in range(no_linhas):
         descontos = desc_fimsem(descontos, adm_pip.iloc[:,4].values[indices[i]], horas_disponiveis[i], no_mes)
         descontos = desc_domingos(descontos, no_mes)
         descontos = desc_admpip(descontos, adm_pip.iloc[:,1].values[indices[i]], no_mes)
-    
+    else:
+        descontos = desc_4turno(descontos, no_mes)
     hdo[i] = sum(descontos) + (descontos == -1).sum() + 2*(descontos == -2).sum() + 3*(descontos == -3).sum()
     c_produtiva[i] = hdo[i]*capacidade/1000
     gap_horas[i] = 1000*(c_produtiva[i] - demanda[i])/capacidade
