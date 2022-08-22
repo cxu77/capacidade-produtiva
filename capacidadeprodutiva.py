@@ -201,8 +201,9 @@ if "LB04" in selecao and "LB09" in selecao:
             cal_linhas[max_index][j] = 0
     
     for i in range(j, len(cal_linhas[min_index])):
-        gap_horas[min_index] -= cal_linhas[min_index][i]
-        cal_linhas[min_index][i] = 0
+        if cal_linhas[min_index][i] > 0:
+            gap_horas[min_index] -= cal_linhas[min_index][i]
+            cal_linhas[min_index][i] = -4
  
 
 for i in range(len(gap_horas)):
@@ -254,6 +255,19 @@ for i in range(0, no_linhas):
                 gap_horas[i] += cal_linhas[i][j]
                 if gap_horas[i] >= 0:
                     break
+
+ for i in range(no_linhas):
+	for j in range(len(cal_linhas[0]):
+		if cal_linhas[i][j] == -1:
+			cal_linhas[i][j] = "FERIADO"
+		elif cal_linhas[i][j] == -2:
+			cal_linhas[i][j] = "PREV"
+		elif cal_linhas[i][j] == -3:
+			cal_linhas[i][j] = "INV"
+        elif cal_linhas[i][j] == -4:
+            cal_linhas[i][j] = 0
+		else:
+			k = 0
 
 for i in range(no_linhas):
     st.write('Calendário da linha ' + selecao[i])
