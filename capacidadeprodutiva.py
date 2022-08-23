@@ -312,8 +312,8 @@ agregado = pd.DataFrame(agregado)
 #agregado.columns = selecao
 agregado = agregado.transpose()
 agregado.columns = ['Linhas', 'Horas', 'Dias']
-agregado.iloc[2] = agregado.iloc[2].round(2)
-agregado.iloc[3] = agregado.iloc[3].round(0)
+agregado.iloc[1] = agregado.iloc[1].round(2)
+agregado.iloc[2] = agregado.iloc[2].round(0)
 pd.options.display.float_format = '{:, .2f}'.format
 st.write("Gap (em horas e em dias)")
 #st.dataframe(agregado)
