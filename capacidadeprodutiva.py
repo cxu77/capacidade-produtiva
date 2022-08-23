@@ -185,13 +185,9 @@ for i in range(no_linhas):
     else:
         descontos = desc_4turnos(descontos, no_mes)
     
-    sum1 = np.count_nonzero(descontos == -1)
-    if sum1 is None:
-        sum1 = 0
-    sum2 = 2*np.count_nonzero(descontos == -2)
-    if sum1 is None:
-        sum2 = 0
-    sum3 = 3*np.count_nonzero(descontos == -3)
+    sum1 = descontos.count(-1)
+    sum2 = 2*descontos.count(-2)
+    sum3 = 3*descontos.count(-3)
     if sum3 is None:
         sum3 = 0
     hdo[i] = sum(descontos) + sum1 + sum2 + sum3
