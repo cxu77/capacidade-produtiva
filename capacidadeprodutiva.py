@@ -161,8 +161,10 @@ for i in range(0, no_linhas):
         horas_disponiveis[i] = 18
     elif turnos[i] == 3:
         horas_disponiveis[i] = 23
-    else:
+    elif turnos[i] == 4:
         horas_disponiveis[i] = 24
+    else:
+        k = 0
 
 c_produtiva = np.zeros(no_linhas)
 gap_horas = np.zeros(no_linhas)
