@@ -320,9 +320,10 @@ agregado.insert(0,'Linhas', coluna1)
 #pd.options.display.float_format = '{:, .2f}'.format
 st.write("Gap (em horas e em dias)")
 #st.dataframe(agregado)
-AgGrid(agregado)
-#gb = GridOptionsBuilder.from_dataframe(results)
-#gb.configure_default_column(groupable=True, value=True, enableRowGroup=True, aggFunc="sum", editable=False)
-#go = gb.build()
+
+gb = GridOptionsBuilder.from_dataframe(agregado)
+gb.configure_columns(columns_names =['Linhas', 'Horas', 'Dias'], groupable=True, value=True, enableRowGroup=True, editable=False)
+go = gb.build()
+AgGrid(agregado, gridOptions = go)
 #AgGrid(results, gridOptions = go, enable_enterprise_modules = True)
         
