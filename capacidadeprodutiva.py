@@ -289,6 +289,7 @@ for i in range(len(cal_linhas[0])):
     nome_colunas.append(str(i+1) + "/" + str(no_mes) + "/" + str(date.today().year))
 
 cal = pd.DataFrame(cal_linhas)
+pd.options.display.float_format = '{:, .2f}'.format
 cal.columns = nome_colunas
 cal['Linhas'] = selecao
 coluna1 = cal.pop('Linhas')
@@ -309,6 +310,7 @@ agregado['Linhas'] = ['Horas', 'Dias']
 coluna1 = agregado.pop('Linhas')
 agregado.insert(0, 'Linhas', coluna1)
 agregado = agregado.transpose()
+pd.options.display.float_format = '{:, .2f}'.format
 st.write("Gap (em horas e em dias)")
 st.dataframe(agregado)
 #gb = GridOptionsBuilder.from_dataframe(results)
