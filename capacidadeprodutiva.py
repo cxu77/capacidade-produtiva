@@ -289,8 +289,8 @@ for i in range(len(cal_linhas[0])):
     nome_colunas.append(str(i+1) + "/" + str(no_mes) + "/" + str(date.today().year))
 
 cal = pd.DataFrame(cal_linhas)
-pd.options.display.float_format = '{:, .2f}'.format
 cal.columns = nome_colunas
+cal = cal.round(2)
 cal['Linhas'] = selecao
 coluna1 = cal.pop('Linhas')
 cal.insert(0, 'Linhas', coluna1)
@@ -298,7 +298,7 @@ cal.replace(-1, "FERIADO", inplace=True)
 cal.replace(-2, "PREV", inplace=True)
 cal.replace(-3, "INV", inplace = True)
 gb = GridOptionsBuilder.from_dataframe(cal)
-gb.configure_columns(column_names=nome_colunas, editable = True, groupable = True, type = "numericColumn", precision = 1)
+gb.configure_columns(column_names=nome_colunas, editable = True, groupable = True, type=["numericColumn"], precision = 1)
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT )
 agregado = []
