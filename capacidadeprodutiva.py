@@ -161,10 +161,8 @@ for i in range(0, no_linhas):
         horas_disponiveis[i] = 18
     elif turnos[i] == 3:
         horas_disponiveis[i] = 23
-    elif turnos[i] == 4:
-        horas_disponiveis[i] = 24
     else:
-        k = 0
+        horas_disponiveis[i] = 24
 
 c_produtiva = np.zeros(no_linhas)
 gap_horas = np.zeros(no_linhas)
@@ -184,10 +182,8 @@ for i in range(no_linhas):
         descontos = desc_fimsem(descontos, adm_pip.iloc[:,4].values[indices[i]], horas_disponiveis[i], no_mes)
         descontos = desc_domingos(descontos, no_mes)
         descontos = desc_admpip(descontos, adm_pip.iloc[:,1].values[indices[i]], no_mes)
-    elif turnos[i] == 4:
-        descontos = desc_4turnos(descontos, no_mes)
     else:
-        k = 0
+        descontos = desc_4turnos(descontos, no_mes)
         
     #sum1 = np.count_nonzero(descontos == -1)
     #sum2 = 2*np.count_nonzero(descontos == -2)
