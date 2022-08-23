@@ -316,8 +316,8 @@ agregado = agregado.transpose()
 agregado.columns = ['Linhas', 'Horas', 'Dias']
 pd.options.display.float_format = '{:, .2f}'.format
 st.write("Gap (em horas e em dias)")
-#st.dataframe(agregado)
-AgGrid(agregado)
+st.dataframe(agregado)
+#AgGrid(agregado)
 #gb = GridOptionsBuilder.from_dataframe(results)
 #gb.configure_default_column(groupable=True, value=True, enableRowGroup=True, aggFunc="sum", editable=False)
 #go = gb.build()
