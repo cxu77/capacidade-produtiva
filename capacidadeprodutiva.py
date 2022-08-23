@@ -324,6 +324,6 @@ st.write("Gap (em horas e em dias)")
 gb = GridOptionsBuilder.from_dataframe(agregado)
 gb.configure_columns(columns_names =['Linhas', 'Horas', 'Dias'], groupable=True, value=True, enableRowGroup=True, editable=False)
 go = gb.build()
-AgGrid(agregado, gridOptions = go)
+AgGrid(data = agregado, gridOptions = go, enable_enterprise_modules = True)
 #AgGrid(results, gridOptions = go, enable_enterprise_modules = True)
         
