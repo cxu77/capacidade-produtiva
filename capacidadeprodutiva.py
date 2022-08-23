@@ -313,7 +313,7 @@ agregado = pd.DataFrame(agregado)
 agregado = agregado.transpose()
 agregado.columns = ['Linhas', 'Horas', 'Dias']
 agregado['Horas'] = agregado['Horas'].round(2)
-agregad['Dias'] = agregado['Dias'].round(0)
+agregado['Dias'] = agregado['Dias'].round(0)
 pd.options.display.float_format = '{:, .2f}'.format
 st.write("Gap (em horas e em dias)")
 #st.dataframe(agregado)
