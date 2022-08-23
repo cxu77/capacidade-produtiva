@@ -185,9 +185,9 @@ for i in range(no_linhas):
     else:
         descontos = desc_4turnos(descontos, no_mes)
     
-    sum1 = descontos.count(-1)
-    sum2 = 2*descontos.count(-2)
-    sum3 = 3*descontos.count(-3)
+    sum1 = np.count_nonzero(descontos == -1)
+    sum2 = 2*np.count_nonzero(descontos == -2)
+    sum3 = 3*np.count_nonzero(descontos == -3)
     hdo[i] = sum(descontos) + sum1 + sum2 + sum3
     c_produtiva[i] = hdo[i]*capacidade/1000
     gap_horas[i] = 1000*(c_produtiva[i] - demanda[i])/capacidade
