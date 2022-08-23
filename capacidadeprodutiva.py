@@ -178,15 +178,17 @@ for i in range(no_linhas):
     descontos = desc_preventivas(descontos, no_mes, preventivas.iloc[:,3:].values[2*indices[i]:2+2*indices[i]])
     descontos = desc_feriados(descontos, no_mes, len(feriados), feriados.iloc[:,1:].values, adm_pip.iloc[:,4].values[indices[i]], adm_pip.iloc[:,2].values[indices[i]])
     descontos = desc_inv(descontos, adm_pip.iloc[:,4].values[indices[i]], no_mes)
-    if turnos[i] != 4:
+    if turnos[i] < 4:
         descontos = desc_inicio(descontos, len(feriados), feriados.iloc[:,1:].values, adm_pip.iloc[:,2].values[indices[i]], horas_disponiveis[i], no_mes)
         descontos = desc_fim(descontos, adm_pip.iloc[:,3].values[indices[i]], horas_disponiveis[i], no_mes)
         descontos = desc_fimsem(descontos, adm_pip.iloc[:,4].values[indices[i]], horas_disponiveis[i], no_mes)
         descontos = desc_domingos(descontos, no_mes)
         descontos = desc_admpip(descontos, adm_pip.iloc[:,1].values[indices[i]], no_mes)
-    else:
+    elif turnos[i] == 4:
         descontos = desc_4turnos(descontos, no_mes)
-    
+    else:
+        k = 0
+        
     #sum1 = np.count_nonzero(descontos == -1)
     #sum2 = 2*np.count_nonzero(descontos == -2)
     #sum3 = 3*np.count_nonzero(descontos == -3)
@@ -298,7 +300,6 @@ gb = GridOptionsBuilder.from_dataframe(cal)
 gb.configure_columns(column_names=nome_colunas, editable = True, groupable = True, type=["numericColumn"], precision = 1)
 gb.configure_auto_height()
 gb.configure_pagination()
-gb.configure_side_bar()
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT )
 agregado = []
