@@ -315,6 +315,9 @@ agregado.columns = ['Horas', 'Dias']
 agregado['Horas'] = agregado['Horas'].round(2)
 agregado['Dias'] = agregado['Dias'].round(0)
 agregado['Linhas'] = selecao
+coluna1  = agregado['Linhas']
+agregado = agregado.pop('Linhas')
+agregado = agregado.insert(0,'Linhas', coluna1)
 #pd.options.display.float_format = '{:, .2f}'.format
 st.write("Gap (em horas e em dias)")
 #st.dataframe(agregado)
