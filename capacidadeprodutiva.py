@@ -192,7 +192,7 @@ for i in range(no_linhas):
         sum1 = 0
     if sum2 is None:
         sum2 = 0
-     if sum3 is None
+    if sum3 is None
         sum3 = 0
     hdo[i] = sum(descontos) + sum1 + sum2 + sum3
     c_produtiva[i] = hdo[i]*capacidade/1000
