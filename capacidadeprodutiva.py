@@ -297,11 +297,10 @@ gb.configure_columns(column_names=nome_colunas, editable = True, groupable = Tru
 gb.configure_auto_height()
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT )
-agregado = []
-
-agregado.append(cal.sum(axis=1))
+agregado = pd.DataFrame.from_dict(results)
+agregado['Horas'] = agregado.sum(axis=1)).round(0)
+agregado['Dias'] = agregado.sum(axis=1)/24).round(2)
 agregado.append(cal.sum(axis=1)/24)
-agregado = pd.DataFrame(agregado)
 #agregado.columns = selecao
 agregado = agregado.transpose()
 agregado.columns = ['Horas', 'Dias']
@@ -311,12 +310,9 @@ agregado['Linhas'] = selecao
 coluna1 = agregado.pop('Linhas')
 agregado.insert(0,'Linhas', coluna1)
 #pd.options.display.float_format = '{:, .2f}'.format
-st.write("Gap (em horas e em dias)")
 #st.dataframe(agregado)
-
+st.write("Gap (em horas e em dias)")
 gb = GridOptionsBuilder.from_dataframe(agregado)
 gb.configure_columns(columns_names =['Linhas', 'Horas', 'Dias'], groupable=True, value=True, enableRowGroup=True, editable=False)
 go = gb.build()
-AgGrid(data = agregado, gridOptions = go, enable_enterprise_modules = True)
-#AgGrid(results, gridOptions = go, enable_enterprise_modules = True)
-        
+AgGrid(data = agregado, gridOptions = go, enable_enterprise_modules = True)       
