@@ -311,10 +311,10 @@ agregado = pd.DataFrame(agregado)
 #agregado.columns = selecao
 agregado.iloc[0] = agregado.iloc[0].round(2)
 agregado.iloc[1] = agregado.iloc[1].round(0)
-agregado['Linhas'] = ['Horas', 'Dias']
+agregado = agregado.transpose()
+agregado['Linhas'] = selecao
 coluna1 = agregado.pop('Linhas')
 agregado.insert(0, 'Linhas', coluna1)
-agregado = agregado.transpose()
 agregado.columns = ['Horas', 'Dias']
 pd.options.display.float_format = '{:, .2f}'.format
 st.write("Gap (em horas e em dias)")
