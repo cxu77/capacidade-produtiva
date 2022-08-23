@@ -298,7 +298,7 @@ cal.replace(-1, "FERIADO", inplace=True)
 cal.replace(-2, "PREV", inplace=True)
 cal.replace(-3, "INV", inplace = True)
 gb = GridOptionsBuilder.from_dataframe(cal)
-gb.configure_columns(column_names=nome_colunas, editable = True)
+gb.configure_columns(column_names=nome_colunas, editable = True, groupable = true, type = "numericColumn", precision = 1)
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT )
 agregado = []
