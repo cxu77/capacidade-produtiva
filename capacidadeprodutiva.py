@@ -305,16 +305,17 @@ gb.configure_side_bar()
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT )
 agregado = []
-agregado.append(selecao)
+
 agregado.append(cal.sum(axis=1))
 agregado.append(cal.sum(axis=1)/24)
 agregado = pd.DataFrame(agregado)
 #agregado.columns = selecao
 agregado = agregado.transpose()
-agregado.columns = ['Linhas', 'Horas', 'Dias']
+agregado.columns = ['Horas', 'Dias']
 agregado['Horas'] = agregado['Horas'].round(2)
 agregado['Dias'] = agregado['Dias'].round(0)
-pd.options.display.float_format = '{:, .2f}'.format
+agregado['Linhas'] = selecao
+#pd.options.display.float_format = '{:, .2f}'.format
 st.write("Gap (em horas e em dias)")
 #st.dataframe(agregado)
 AgGrid(agregado)
