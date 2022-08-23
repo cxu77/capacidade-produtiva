@@ -188,8 +188,6 @@ for i in range(no_linhas):
     sum1 = descontos.count(-1)
     sum2 = 2*descontos.count(-2)
     sum3 = 3*descontos.count(-3)
-    if sum3 is None:
-        sum3 = 0
     hdo[i] = sum(descontos) + sum1 + sum2 + sum3
     c_produtiva[i] = hdo[i]*capacidade/1000
     gap_horas[i] = 1000*(c_produtiva[i] - demanda[i])/capacidade
