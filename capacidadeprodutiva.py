@@ -306,7 +306,8 @@ agregado.append(cal.sum(axis=1))
 agregado.append(cal.sum(axis=1)/24)
 agregado = pd.DataFrame(agregado)
 agregado.columns = selecao
-agregado = agregado.round(2)
+agregado.iloc[0] = agregado.iloc[0].round(2)
+agregado.iloc[1] = agregado.iloc[1].round(0)
 agregado['Linhas'] = ['Horas', 'Dias']
 coluna1 = agregado.pop('Linhas')
 agregado.insert(0, 'Linhas', coluna1)
