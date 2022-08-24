@@ -299,7 +299,7 @@ go = gb.build()
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT )
 agregado = pd.DataFrame.from_dict(results)
 agregado['Horas'] = agregado.sum(axis=1).round(0)
-agregado['Dias'] = agregado.sum(axis=1)/24).round(2)
+agregado['Dias'] = (agregado.sum(axis=1)/24).round(2)
 agregado.append(cal.sum(axis=1)/24)
 #agregado.columns = selecao
 agregado = agregado.transpose()
