@@ -301,11 +301,9 @@ agregado = pd.DataFrame.from_dict(results)
 agregado = agregado.transpose()
 agregado['Horas'] = agregado.sum(axis=1)
 agregado['Dias'] = agregado.sum(axis=1)/24
-agregado.append(cal.sum(axis=1)/24)
-#agregado.columns = selecao
 agregado.columns = ['Horas', 'Dias']
-#agregado['Horas'] = agregado['Horas'].round(2)
-#agregado['Dias'] = agregado['Dias'].round(0)
+agregado['Horas'] = agregado['Horas'].round(2)
+agregado['Dias'] = agregado['Dias'].round(0)
 agregado['Linhas'] = selecao
 coluna1 = agregado.pop('Linhas')
 agregado.insert(0,'Linhas', coluna1)
