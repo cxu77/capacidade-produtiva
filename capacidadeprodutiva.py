@@ -298,14 +298,14 @@ gb.configure_auto_height()
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT )
 agregado = pd.DataFrame.from_dict(results)
-agregado['Horas'] = agregado.sum(axis=1).round(0)
-agregado['Dias'] = agregado.sum(axis=1).round(2)/24
+agregado = agregado.transpose()
+agregado['Horas'] = agregado.sum(axis=1)
+agregado['Dias'] = agregado.sum(axis=1)/24
 agregado.append(cal.sum(axis=1)/24)
 #agregado.columns = selecao
-agregado = agregado.transpose()
 agregado.columns = ['Horas', 'Dias']
-agregado['Horas'] = agregado['Horas'].round(2)
-agregado['Dias'] = agregado['Dias'].round(0)
+#agregado['Horas'] = agregado['Horas'].round(2)
+#agregado['Dias'] = agregado['Dias'].round(0)
 agregado['Linhas'] = selecao
 coluna1 = agregado.pop('Linhas')
 agregado.insert(0,'Linhas', coluna1)
