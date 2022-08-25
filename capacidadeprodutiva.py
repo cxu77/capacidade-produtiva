@@ -167,6 +167,7 @@ for i in range(0, no_linhas):
 c_produtiva = np.zeros(no_linhas)
 capacidade = np.zeros(no_linhas)
 gap_horas = np.zeros(no_linhas)
+necess = np.zeros(no_linhas)
 hdo = np.zeros(no_linhas)
 cal_linhas = []
 
@@ -191,6 +192,7 @@ for i in range(no_linhas):
     #sum3 = 3*np.count_nonzero(descontos == -3)
 
     hdo[i] = sum(filter(lambda x: x>=0, descontos))
+    necess[i] = 1000*demanda[i]/capacidade[i]
     c_produtiva[i] = hdo[i]*capacidade[i]/1000
     gap_horas[i] = 1000*(c_produtiva[i] - demanda[i])/capacidade[i]
     cal_linhas.append(descontos)
@@ -299,7 +301,8 @@ gb.configure_columns(column_names=nome_colunas, editable = True, groupable = Tru
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT )
 agregado = pd.DataFrame.from_dict(results["data"])
-agregado['Horas'] = agregado.sum(axis=1) - 1000*demanda[i]/capacidade[i]
+agregado['Necessario'] = necess
+agregado['Horas'] = agregado.sum(axis=1) - necess
 agregado['Dias'] = agregado['Horas']/24
 agregado['Horas'] = agregado['Horas'].round(2)
 agregado['Dias'] = agregado['Dias'].round(0)
