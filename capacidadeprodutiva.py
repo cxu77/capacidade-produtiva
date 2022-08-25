@@ -302,8 +302,6 @@ go = gb.build()
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT )
 agregado = pd.DataFrame.from_dict(results["data"])
 agregado['Horas'] = agregado.sum(axis='columns')
-agregado['Gap'] = gap_horas
-agregado['Necessario'] = necess
 agregado['Horas'] = agregado['Horas'] - agregado['Necessario']
 agregado['Dias'] = agregado['Horas']/24
 agregado['Horas'] = agregado['Horas'].round(2)
