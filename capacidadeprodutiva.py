@@ -298,8 +298,8 @@ gb.configure_columns(column_names=nome_colunas, editable = True, groupable = Tru
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT )
 agregado = pd.DataFrame.from_dict(results["data"])
-#agregado['Horas'] = agregado.sum(axis=1)
-#agregado['Dias'] = agregado.sum(axis=1)/24
+agregado['Horas'] = agregado.sum(axis=1)
+agregado['Dias'] = agregado.sum(axis=1)/24
 #agregado.columns = ['Horas', 'Dias']
 #agregado['Horas'] = agregado['Horas'].round(2)
 #agregado['Dias'] = agregado['Dias'].round(0)
