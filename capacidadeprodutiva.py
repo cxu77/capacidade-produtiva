@@ -165,12 +165,13 @@ for i in range(0, no_linhas):
         horas_disponiveis[i] = 24
 
 c_produtiva = np.zeros(no_linhas)
+capacidade = np.zeros(no_linhas)
 gap_horas = np.zeros(no_linhas)
 hdo = np.zeros(no_linhas)
 cal_linhas = []
 
 for i in range(no_linhas):
-    capacidade = adm_pip.iloc[:,5].values[indices[i]]
+    capacidade[i] = adm_pip.iloc[:,5].values[indices[i]]
     inicio_mes, dias_mes = cal_mensal(no_mes)
     descontos = np.ones(dias_mes)*horas_disponiveis[i]
     descontos = desc_preventivas(descontos, no_mes, preventivas.iloc[:,3:].values[2*indices[i]:2+2*indices[i]])
@@ -190,8 +191,8 @@ for i in range(no_linhas):
     #sum3 = 3*np.count_nonzero(descontos == -3)
 
     hdo[i] = sum(filter(lambda x: x>=0, descontos))
-    c_produtiva[i] = hdo[i]*capacidade/1000
-    gap_horas[i] = 1000*(c_produtiva[i] - demanda[i])/capacidade
+    c_produtiva[i] = hdo[i]*capacidade[i]/1000
+    gap_horas[i] = 1000*(c_produtiva[i] - demanda[i])/capacidade[i]
     cal_linhas.append(descontos)
 
 
