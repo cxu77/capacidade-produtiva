@@ -306,7 +306,7 @@ agregado['Horas'] = agregado.sum(axis=1) - necess
 agregado['Dias'] = agregado['Horas']/24
 agregado['Horas'] = agregado['Horas'].round(2)
 agregado['Dias'] = agregado['Dias'].round(0)
-result_agregado = agregado[['Linhas', 'Horas', 'Dias']]
+result_agregado = agregado[['Linhas', 'Horas', 'Dias', 'Necessario']]
 #agregado['Linhas'] = selecao
 #coluna1 = agregado.pop('Linhas')
 #agregado.insert(0,'Linhas', coluna1)
