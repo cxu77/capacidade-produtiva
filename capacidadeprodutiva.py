@@ -301,8 +301,8 @@ results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enter
 agregado = pd.DataFrame.from_dict(results["data"])
 agregado['Horas'] = agregado.sum(axis=1)
 agregado['Dias'] = agregado.sum(axis=1)/24
-agregado['Horas'] = agregado['Horas'].round(2)
-agregado['Dias'] = agregado['Dias'].round(0)
+#agregado['Horas'] = agregado['Horas'].round(2)
+#agregado['Dias'] = agregado['Dias'].round(0)
 result_agregado = agregado[['Linhas', 'Horas', 'Dias']]
 #agregado['Linhas'] = selecao
 #coluna1 = agregado.pop('Linhas')
