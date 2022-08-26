@@ -304,7 +304,7 @@ agregado.replace("FERIADO", 0., inplace = True)
 agregado.replace("PREV", 0., inplace = True)
 agregado.replace("INV", 0., inplace = True)
 agregado.apply(pd.to_numeric, errors='ignore')
-agregado = pd.Dataframe.to_numpy(agregado)
+agregado = pd.DataFrame.to_numpy(agregado)
 st.write(agregado)
 
 
