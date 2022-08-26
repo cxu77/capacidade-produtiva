@@ -304,7 +304,7 @@ agregado.replace("FERIADO", 0., inplace = True)
 agregado.replace("PREV", 0., inplace = True)
 agregado.replace("INV", 0., inplace = True)
 agregado.apply(pd.to_numeric, errors='ignore')
-agregado = pd.DataFrame.to_numpy(agregado)
+agregado = agregado.groupby('Linhas').sum()
 st.write(agregado)
 
 
