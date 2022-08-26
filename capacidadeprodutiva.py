@@ -36,7 +36,7 @@ def desc_preventivas(descontos, monthnumber, prev_datas):
 def desc_domingos(descontos, monthnumber):
     for i in range(len(descontos)):
         if calendar.weekday(date.today().year, monthnumber, i+1) % 7 == 6:
-            descontos[i] = 0
+            descontos[i] = 0.
     return descontos
 
 def desc_feriados(descontos, monthnumber, tam, feriado_datas, psem, pinicio):
