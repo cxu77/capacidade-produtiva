@@ -97,7 +97,7 @@ def desc_admpip(descontos, adm, monthnumber):
 
 def desc_4turnos(descontos, monthnumber):
     for i in range(len(descontos)):
-        if calendar.weekday(date.today().year, monthnumber, i+1) % 7 < 5 and descontos[i] > 0:
+        if calendar.weekday(date.today().year, monthnumber, i+1) % 7 < 5 and descontos[i] > 0 and descontos[i] !=5:
             descontos[i] -= 1
         else:
             descontos[i] -= 2
@@ -194,7 +194,7 @@ for i in range(no_linhas):
     hdo[i] = sum(filter(lambda x: x>=0, descontos))
     necess[i] = 1000*demanda[i]/capacidade[i]
     c_produtiva[i] = hdo[i]*capacidade[i]/1000
-    gap_horas[i] = 1000*(c_produtiva[i] - demanda[i])/capacidade[i]
+    gap_horas[i] = hdo[i] - necess[i]
     cal_linhas.append(descontos)
 
 
@@ -303,7 +303,7 @@ results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enter
 agregado = pd.DataFrame.from_dict(results["data"])
 agregado['Necessario'] = necess
 agregado['Gap'] = gap_horas
-agregado['Horas'] = agregado.sum(axis='columns')
+agregado['Horas'] = agregado.sum(axis=1)
 agregado['Horas'] = agregado['Gap'] + (agregado['Horas'] - agregado['Necessario'])
 agregado['Dias'] = agregado['Horas']/24
 agregado['Horas'] = agregado['Horas'].round(2)
