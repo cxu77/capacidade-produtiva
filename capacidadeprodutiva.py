@@ -304,15 +304,9 @@ agregado.replace("FERIADO", 0., inplace = True)
 agregado.replace("PREV", 0., inplace = True)
 agregado.replace("INV", 0., inplace = True)
 agregado.apply(pd.to_numeric, errors='ignore')
-agregado['Horas'] = agregado.sum(axis=1)
-agregado['Necessario'] = necess
-agregado['HDO'] = hdo
-agregado['Gap_Calculado'] = gap_horas
-agregado['Gap Horas'] = agregado['Gap_Calculado'] + ((agregado['Horas'] - agregado['Necessario']) - agregado['Gap_Calculado'])
-agregado['Gap Dias'] = agregado['Gap Horas']/24
-agregado['Gap Horas'] = agregado['Gap Horas'].round(2)
-agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
-st.dataframe(agregado)
+agregado = pd.Dataframe.to_numpy(agregado)
+st.write(agregado)
+
 
 #result_agregado = agregado[['Linhas', 'Gap Horas', 'Gap Dias']]
 st.write("Gap (em horas e em dias)")
@@ -321,5 +315,5 @@ st.write("Gap (em horas e em dias)")
 #go = gb.build()
 
 
-AgGrid(agregado)
+#AgGrid(agregado)
 #st.dataframe(result_agregado)    
