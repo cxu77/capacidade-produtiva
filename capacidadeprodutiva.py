@@ -307,7 +307,7 @@ agregado['Gap Horas'] = agregado['Gap_Calculado'] + (agregado['Gap_Calculado'] -
 agregado['Gap Dias'] = agregado['Gap Horas']/24
 agregado['Gap Horas'] = agregado['Gap Horas'].round(2)
 agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
-result_agregado = agregado[['Linhas', 'Gap Horas', 'Gap Dias']]
+#result_agregado = agregado[['Linhas', 'Gap Horas', 'Gap Dias']]
 #agregado['Linhas'] = selecao
 #coluna1 = agregado.pop('Linhas')
 #agregado.insert(0,'Linhas', coluna1)
@@ -315,5 +315,5 @@ st.write("Gap (em horas e em dias)")
 #gb = GridOptionsBuilder.from_dataframe(agregado["data"])
 #gb.configure_columns(columns_names =[], groupable=True, value=True, enableRowGroup=True, editable=False)
 #go = gb.build()
-#st.dataframe(agregado)
-st.dataframe(result_agregado)    
+st.dataframe(agregado)
+#st.dataframe(result_agregado)    
