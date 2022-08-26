@@ -300,7 +300,7 @@ gb.configure_columns(column_names=nome_colunas, editable = True, groupable = Tru
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True)
 agregado = pd.DataFrame.from_dict(results["data"])
-agregado['Horas'] = agregado.sum(axis=1, skipna = False)
+agregado['Horas'] = agregado.sum(axis=1)
 agregado['Necessario'] = necess
 agregado['Gap_Calculado'] = gap_horas
 agregado['Gap Horas'] = agregado['Gap_Calculado'] + ((agregado['Horas'] - agregado['Necessario']) - agregado['Gap_Calculado'])
