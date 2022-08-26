@@ -305,7 +305,6 @@ agregado.replace("PREV", 0., inplace = True)
 agregado.replace("INV", 0., inplace = True)
 agregado.apply(pd.to_numeric, errors='ignore')
 st.dataframe(agregado)
-agregado = agregado.groupby('Linhas')
 agregado['Horas'] = agregado.sum(axis=1)
 agregado['Necessario'] = necess
 agregado['HDO'] = hdo
