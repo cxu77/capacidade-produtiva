@@ -303,9 +303,8 @@ results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enter
 agregado = pd.DataFrame.from_dict(results["data"])
 agregado['Horas'] = agregado.sum(axis=1)
 agregado['Necessario'] = necess
-agregado['HDO'] = hdo
 agregado['Gap'] = gap_horas
-#agregado['Teste'] = agregado['Gap'] + (agregado['Horas'] - agregado['Necessario'])
+agregado['Teste'] = agregado['Gap'] + (agregado['Gap'] - (agregado['Horas'] - agregado['Necessario']))
 #agregado['Dias'] = agregado['Teste']/24
 #agregado['Teste'] = agregado['Teste'].round(2)
 #agregado['Dias'] = agregado['Dias'].round(0)
