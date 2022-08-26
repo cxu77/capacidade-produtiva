@@ -300,14 +300,15 @@ gb.configure_columns(column_names=nome_colunas, editable = True, groupable = Tru
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True)
 agregado = pd.DataFrame.from_dict(results["data"])
-agregado['Horas'] = agregado.sum(axis=1)
-agregado['Necessario'] = necess
-agregado['HDO'] = hdo
-agregado['Gap_Calculado'] = gap_horas
-agregado['Gap Horas'] = agregado['Gap_Calculado'] + ((agregado['Horas'] - agregado['Necessario']) - agregado['Gap_Calculado'])
-agregado['Gap Dias'] = agregado['Gap Horas']/24
-agregado['Gap Horas'] = agregado['Gap Horas'].round(2)
-agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
+agregado = agregado.groupby(['Linhas']).sum()
+#agregado['Horas'] = agregado.sum(axis=1)
+#agregado['Necessario'] = necess
+#agregado['HDO'] = hdo
+#agregado['Gap_Calculado'] = gap_horas
+#agregado['Gap Horas'] = agregado['Gap_Calculado'] + ((agregado['Horas'] - agregado['Necessario']) - agregado['Gap_Calculado'])
+#agregado['Gap Dias'] = agregado['Gap Horas']/24
+#agregado['Gap Horas'] = agregado['Gap Horas'].round(2)
+#agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
 #result_agregado = agregado[['Linhas', 'Gap Horas', 'Gap Dias']]
 #agregado['Linhas'] = selecao
 #coluna1 = agregado.pop('Linhas')
