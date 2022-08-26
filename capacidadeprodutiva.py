@@ -302,13 +302,14 @@ go = gb.build()
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT )
 agregado = pd.DataFrame.from_dict(results["data"])
 agregado['Necessario'] = necess
+agreado['HDO'] = hdo
 agregado['Gap'] = gap_horas
 agregado['Horas'] = agregado.sum(axis=1)/2
 agregado['Teste'] = agregado['Gap'] + (agregado['Horas'] - agregado['Necessario'])
 agregado['Dias'] = agregado['Teste']/24
 agregado['Teste'] = agregado['Teste'].round(2)
 agregado['Dias'] = agregado['Dias'].round(0)
-result_agregado = agregado[['Linhas', 'Horas', 'Dias', 'Necessario', 'Gap', 'Teste']]
+result_agregado = agregado[['Linhas', 'Horas', 'Dias', 'Necessario', 'Gap', 'Teste', 'HDO']]
 #agregado['Linhas'] = selecao
 #coluna1 = agregado.pop('Linhas')
 #agregado.insert(0,'Linhas', coluna1)
