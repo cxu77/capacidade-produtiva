@@ -275,12 +275,7 @@ for i in range(0, no_linhas):
                 cal_linhas[i][j] = horas_disponiveis[i] - adm_pip.iloc[:,3].values[indices[i]] - adm_pip.iloc[:,2].values[indices[i]] - adm_pip.iloc[:,1].values[indices[i]]
                 gap_horas[i] += cal_linhas[i][j]
                 if gap_horas[i] >= 0:
-                    break
-                    
-for i in range(no_linhas):
-    for j in range(len(cal_linhas[0])):
-        if cal_linhas[i][j] == -4:
-            cal_linhas[i][j] = 0                   
+                    break           
 
 nome_colunas = []
 for i in range(len(cal_linhas[0])):
@@ -295,6 +290,7 @@ cal.insert(0, 'Linhas', coluna1)
 cal.replace(-1, "FERIADO", inplace=True)
 cal.replace(-2, "PREV", inplace=True)
 cal.replace(-3, "INV", inplace = True)
+cal.replace(-4, 0, inplace = True)
 gb = GridOptionsBuilder.from_dataframe(cal)
 gb.configure_columns(column_names=nome_colunas, editable = True, groupable = True, type=["numericColumn"], precision = 1)
 #gb.configure_auto_height()
