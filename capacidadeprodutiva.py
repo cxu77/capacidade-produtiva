@@ -303,7 +303,7 @@ agregado = pd.DataFrame.from_dict(results["data"])
 agregado.replace("FERIADO", 0., inplace = True)
 agregado.replace("PREV", 0., inplace = True)
 agregado.replace("INV", 0., inplace = True)
-agregado.tranpose()
+agregado = agregado.tranpose()
 agregado = agregado.groupby('Linhas').agg('sum')
 #agregado['Horas'] = agregado.sum(axis=1)
 #agregado['Necessario'] = necess
