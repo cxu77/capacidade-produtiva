@@ -120,6 +120,7 @@ st.title('Capacidade Produtiva')
 st.text('Aplicativo para estudos sobre capacidade produtiva')
 st.header('Calendário')
 
+#inserção do mês e escolha de opções de linhas
 no_mes = st.number_input("Insira o número do mês: ", min_value = 1, max_value = 12, format = '%d')
 q1 = "Selecione as linhas em que deseja calcular a capacidade:"
 opcoes = adm_pip.iloc[:,0].values
@@ -134,6 +135,8 @@ for i in range(no_linhas):
         if selecao[i] == opcoes[j]:
             indices.append(j)
 
+
+#criação de variaveis auxiliares
 
 turnos = np.zeros(no_linhas)
 horas_disponiveis = np.zeros(no_linhas)
@@ -299,12 +302,12 @@ results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enter
 agregado = pd.DataFrame.from_dict(results["data"])
 agregado['Horas'] = agregado.sum(axis=1)
 agregado['Necessario'] = necess
-agregado['Gap'] = gap_horas
-agregado['Teste'] = agregado['Gap'] + (agregado['Gap'] - (agregado['Horas'] - agregado['Necessario']))
-#agregado['Dias'] = agregado['Teste']/24
-#agregado['Teste'] = agregado['Teste'].round(2)
-#agregado['Dias'] = agregado['Dias'].round(0)
-#result_agregado = agregado[['Linhas', 'Horas', 'Dias', 'Necessario', 'Gap', 'Teste', 'HDO']]
+agregado['Gap_Calculado'] = gap_horas
+agregado['Gap Horas'] = agregado['Gap_Calculado'] + (agregado['Gap_Calculado'] - (agregado['Horas'] - agregado['Necessario']))
+agregado['Gap Dias'] = agregado['Gap Horas']/24
+agregado['Gap Horas'] = agregado['Gap Horas'].round(2)
+agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
+result_agregado = agregado[['Linhas', 'Gap Horas', 'Gap Dias']]
 #agregado['Linhas'] = selecao
 #coluna1 = agregado.pop('Linhas')
 #agregado.insert(0,'Linhas', coluna1)
@@ -312,5 +315,5 @@ st.write("Gap (em horas e em dias)")
 #gb = GridOptionsBuilder.from_dataframe(agregado["data"])
 #gb.configure_columns(columns_names =[], groupable=True, value=True, enableRowGroup=True, editable=False)
 #go = gb.build()
-st.dataframe(agregado)
-#st.dataframe(result_agregado)    
+#st.dataframe(agregado)
+st.dataframe(result_agregado)    
