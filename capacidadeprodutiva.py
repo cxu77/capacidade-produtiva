@@ -311,7 +311,7 @@ st.write("Gap (em horas e em dias)")
 #gb = GridOptionsBuilder.from_dataframe(agregado["data"])
 #gb.configure_columns(columns_names =[], groupable=True, value=True, enableRowGroup=True, editable=False)
 #go = gb.build()
-AgGrid(agregado)
+
 agregado['Horas'] = agregado.sum(axis=1)
 agregado['Necessario'] = necess
 agregado['HDO'] = hdo
@@ -320,4 +320,5 @@ agregado['Gap Horas'] = agregado['Gap_Calculado'] + ((agregado['Horas'] - agrega
 agregado['Gap Dias'] = agregado['Gap Horas']/24
 agregado['Gap Horas'] = agregado['Gap Horas'].round(2)
 agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
+AgGrid(agregado)
 #st.dataframe(result_agregado)    
