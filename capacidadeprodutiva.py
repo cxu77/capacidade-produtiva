@@ -300,9 +300,10 @@ gb.configure_columns(column_names=nome_colunas, editable = True, groupable = Tru
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True)
 agregado = pd.DataFrame.from_dict(results["data"])
-agregado.replace("FERIADO", 0, inplace = True)
-agregado.replace("PREV", 0, inplace = True)
-agregado.replace("INV", 0, inplace = True)
+agregado.replace("FERIADO", 0., inplace = True)
+agregado.replace("PREV", 0., inplace = True)
+agregado.replace("INV", 0., inplace = True)
+agregado.tranpose()
 agregado = agregado.groupby('Linhas').agg('sum')
 #agregado['Horas'] = agregado.sum(axis=1)
 #agregado['Necessario'] = necess
