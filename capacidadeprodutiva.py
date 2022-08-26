@@ -304,11 +304,11 @@ agregado = pd.DataFrame.from_dict(results["data"])
 agregado['Necessario'] = necess
 agregado['Gap'] = gap_horas
 agregado['Horas'] = agregado.sum(axis=1)
-agregado['Horas'] = agregado['Gap'] + (agregado['Horas'] - agregado['Necessario'])
-agregado['Dias'] = agregado['Horas']/24
-agregado['Horas'] = agregado['Horas'].round(2)
+agregado['Teste'] = agregado['Gap'] + (agregado['Horas'] - agregado['Necessario'])
+agregado['Dias'] = agregado['Teste']/24
+agregado['Teste'] = agregado['Teste'].round(2)
 agregado['Dias'] = agregado['Dias'].round(0)
-result_agregado = agregado[['Linhas', 'Horas', 'Dias', 'Necessario', 'Gap']]
+result_agregado = agregado[['Linhas', 'Horas', 'Dias', 'Necessario', 'Gap', 'Teste']]
 #agregado['Linhas'] = selecao
 #coluna1 = agregado.pop('Linhas')
 #agregado.insert(0,'Linhas', coluna1)
