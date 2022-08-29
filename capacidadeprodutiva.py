@@ -295,11 +295,11 @@ cal.replace(-3, "INV", inplace = True)
 cal.replace(-4, 0, inplace = True)
 cal.insert(0, 'Linhas', coluna1)
 gb = GridOptionsBuilder.from_dataframe(cal)
-gb.configure_columns(column_names=nome_colunas, editable = True, groupable = True, precision = 1, rowDrag = True, rowDragManaged = True, sortable = True)
+gb.configure_columns(column_names=nome_colunas, editable = True, groupable = True, precision = 1)
 gb.configure_column(field = 'Linhas',  rowDrag = True, rowDragManaged = True)
 gb.configure_auto_height()
 go = gb.build()  
-results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT)
+results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, rowDrag = True, rowDragManaged = True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT)
 dict={}
 for i in results["data"]:
     dict[i] = []
