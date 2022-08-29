@@ -313,13 +313,13 @@ agregado = agregado.groupby("Linhas").sum()
 agregado = agregado.astype("float")
 
 agregado['Horas'] = agregado.sum(axis=1)
-#agregado['Necessario'] = necess
-#agregado['HDO'] = hdo
-#agregado['Gap_Calculado'] = gap_horas
-#agregado['Gap Horas'] = agregado['Gap_Calculado'] + ((agregado['Horas'] - agregado['Necessario']) - agregado['Gap_Calculado'])
-#agregado['Gap Dias'] = agregado['Gap Horas']/24
-#agregado['Gap Horas'] = agregado['Gap Horas'].round(2)
-#agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
+agregado['Necessario'] = necess
+agregado['HDO'] = hdo
+agregado['Gap_Calculado'] = gap_horas
+agregado['Gap Horas'] = agregado['Gap_Calculado'] + ((agregado['Horas'] - agregado['Necessario']) - agregado['Gap_Calculado'])
+agregado['Gap Dias'] = agregado['Gap Horas']/24
+agregado['Gap Horas'] = agregado['Gap Horas'].round(2)
+agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
 st.write(agregado)
 #result_agregado = agregado[['Linhas', 'Gap Horas', 'Gap Dias']]
 #st.write("Gap (em horas e em dias)")
