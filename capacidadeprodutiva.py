@@ -245,10 +245,10 @@ for i in range(len(gap_horas)):
                     cal_linhas[i][j] += k
                     if cal_linhas[i][j] > 24:
                         cal_linhas[i][j] = 24
-                    cal_linhas[index][j] -= 5
+                    cal_linhas[index][j] -= k*capacidade[i]/capacidade[index]
                     if cal_linhas[index][j] < 0:
                         cal_linhas[index][j] = 0
-                    gap_horas[index] -= 5
+                    gap_horas[index] -= cal_linhas[index][j]
                     gap_horas[i] += cal_linhas[i][j] - p
                     if gap_horas[i] >= 0:
                         break
@@ -263,11 +263,11 @@ for i in range(len(gap_horas)):
                     cal_linhas[i][j] += k
                     if cal_linhas[i][j] > 24:
                         cal_linhas[i][j] = 24
-                    cal_linhas[index][j] -= 5
+                    cal_linhas[index][j] -= k*capacidade[i]/capacidade[index]
                     if cal_linhas[index][j] < 0:
                         cal_linhas[index][j] = 0
                     gap_horas[i] += cal_linhas[i][j] - p
-                    gap_horas[index] -= 5   
+                    gap_horas[index] -= cal_linhas[index][j]   
                     if gap_horas[i] >= 0:
                         break
                                         
@@ -289,37 +289,40 @@ cal.columns = nome_colunas
 cal = cal.round(2)
 cal['Linhas'] = selecao
 coluna1 = cal.pop('Linhas')
-cal.insert(0, 'Linhas', coluna1)
 cal.replace(-1, "FERIADO", inplace=True)
 cal.replace(-2, "PREV", inplace=True)
 cal.replace(-3, "INV", inplace = True)
 cal.replace(-4, 0, inplace = True)
+cal.insert(0, 'Linhas', coluna1)
 gb = GridOptionsBuilder.from_dataframe(cal)
 gb.configure_columns(column_names=nome_colunas, editable = True, groupable = True, precision = 1)
 #gb.configure_auto_height()
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT)
-agregado = pd.DataFrame.from_dict(results["data"])
-agregado.replace("FERIADO", 0., inplace = True)
-agregado.replace("PREV", 0., inplace = True)
-agregado.replace("INV", 0., inplace = True)
-agregado['Horas'] = agregado.sum(axis=1)
-agregado['Necessario'] = necess
-agregado['HDO'] = hdo
-agregado['Gap_Calculado'] = gap_horas
-agregado['Gap Horas'] = agregado['Gap_Calculado'] + ((agregado['Horas'] - agregado['Necessario']) - agregado['Gap_Calculado'])
-agregado['Gap Dias'] = agregado['Gap Horas']/24
-agregado['Gap Horas'] = agregado['Gap Horas'].round(2)
-agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
-st.write(agregado)
-
+#dict={}
+#for i in results["data"]:
+#    dict[i] = []
+#    for j in results["data"][i]:
+#        dict[i].append(str(j))
+        
+#agregado = pd.DataFrame.from_dict(dict)
+#agregado.replace("FERIADO", "0", inplace = True)
+#agregado.replace("PREV", "0", inplace = True)
+#agregado.replace("INV", "0", inplace = True)
+#agregado.insert(0, 'Linhas', coluna1)
+#st.write(agregado)
+#agregado['Horas'] = float(agregado.sum(axis=1))
+#agregado['Necessario'] = necess
+#agregado['HDO'] = hdo
+#agregado['Gap_Calculado'] = gap_horas
+#agregado['Gap Horas'] = agregado['Gap_Calculado'] + ((agregado['Horas'] - agregado['Necessario']) - agregado['Gap_Calculado'])
+#agregado['Gap Dias'] = agregado['Gap Horas']/24
+#agregado['Gap Horas'] = agregado['Gap Horas'].round(2)
+#agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
 
 #result_agregado = agregado[['Linhas', 'Gap Horas', 'Gap Dias']]
-st.write("Gap (em horas e em dias)")
+#st.write("Gap (em horas e em dias)")
 #gb = GridOptionsBuilder.from_dataframe(agregado["data"])
 #gb.configure_columns(columns_names =[], groupable=True, value=True, enableRowGroup=True, editable=False)
 #go = gb.build()
-
-
-#AgGrid(agregado)
 #st.dataframe(result_agregado)    
