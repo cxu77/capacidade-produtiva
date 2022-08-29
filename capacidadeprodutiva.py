@@ -311,7 +311,7 @@ agregado.replace("PREV", "0", inplace = True)
 agregado.replace("INV", "0", inplace = True)
 agregado = agregado.groupby("Linhas").sum()
 agregado.astype("float")
-st.write(agregado)
+
 agregado['Horas'] = float(agregado.sum(axis=1))
 #agregado['Necessario'] = necess
 #agregado['HDO'] = hdo
@@ -320,7 +320,7 @@ agregado['Horas'] = float(agregado.sum(axis=1))
 #agregado['Gap Dias'] = agregado['Gap Horas']/24
 #agregado['Gap Horas'] = agregado['Gap Horas'].round(2)
 #agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
-
+st.write(agregado)
 #result_agregado = agregado[['Linhas', 'Gap Horas', 'Gap Dias']]
 #st.write("Gap (em horas e em dias)")
 #gb = GridOptionsBuilder.from_dataframe(agregado["data"])
