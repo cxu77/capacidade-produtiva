@@ -323,6 +323,8 @@ agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
 #st.write(agregado)
 result_agregado = agregado[['Gap Horas', 'Gap Dias']]
 result_agregado['Linhas'] = selecao
+coluna1 = result_agregado.pop('Linhas')
+result_agregado.insert(0, 'Linhas', coluna1)
 st.write("Gap (em horas e em dias)")
 #gb = GridOptionsBuilder.from_dataframe(agregado["data"])
 #gb.configure_columns(columns_names =[], groupable=True, value=True, enableRowGroup=True, editable=False)
