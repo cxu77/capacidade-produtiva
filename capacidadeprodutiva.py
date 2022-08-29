@@ -296,7 +296,7 @@ cal.replace(-4, 0, inplace = True)
 cal.insert(0, 'Linhas', coluna1)
 gb = GridOptionsBuilder.from_dataframe(cal)
 gb.configure_columns(column_names=nome_colunas, editable = True, groupable = True, precision = 1)
-gb.configure_default_column(rowDrag = True)
+gb.configure_column(field = 'Linhas', rowDrag = True)
 #gb.configure_auto_height()
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT)
@@ -312,7 +312,6 @@ agregado.replace("PREV", "0", inplace = True)
 agregado.replace("INV", "0", inplace = True)
 agregado = agregado.groupby("Linhas").sum()
 agregado = agregado.astype("float")
-
 agregado['Horas'] = agregado.sum(axis=1)
 agregado['Necessario'] = necess
 agregado['HDO'] = hdo
