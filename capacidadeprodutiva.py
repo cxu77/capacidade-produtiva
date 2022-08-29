@@ -305,12 +305,12 @@ results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enter
 #    for j in results["data"][i]:
 #        dict[i].append(str(j))
         
-#agregado = pd.DataFrame.from_dict(dict)
-#agregado.replace("FERIADO", "0", inplace = True)
-#agregado.replace("PREV", "0", inplace = True)
-#agregado.replace("INV", "0", inplace = True)
-#agregado.insert(0, 'Linhas', coluna1)
-#st.write(agregado)
+agregado = pd.DataFrame.from_dict(dict)
+agregado.replace("FERIADO", "0", inplace = True)
+agregado.replace("PREV", "0", inplace = True)
+agregado.replace("INV", "0", inplace = True)
+agregado.groupby("Linhas").sum()
+agregado.astype("float)
 #agregado['Horas'] = float(agregado.sum(axis=1))
 #agregado['Necessario'] = necess
 #agregado['HDO'] = hdo
