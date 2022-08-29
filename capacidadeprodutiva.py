@@ -310,7 +310,7 @@ agregado.replace("FERIADO", "0", inplace = True)
 agregado.replace("PREV", "0", inplace = True)
 agregado.replace("INV", "0", inplace = True)
 agregado = agregado.groupby("Linhas").sum()
-agregado.astype("float")
+agregado = agregado.astype("float")
 
 agregado['Horas'] = agregado.sum(axis=1)
 #agregado['Necessario'] = necess
