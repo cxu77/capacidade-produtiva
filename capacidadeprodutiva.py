@@ -299,11 +299,11 @@ gb.configure_columns(column_names=nome_colunas, editable = True, groupable = Tru
 #gb.configure_auto_height()
 go = gb.build()  
 results = AgGrid(data = cal, reload_data = False, gridOptions = go, enable_enterprise_modules=True, update_mode = GridUpdateMode.VALUE_CHANGED, data_return_mode = DataReturnMode.AS_INPUT)
-#dict={}
-#for i in results["data"]:
-#    dict[i] = []
-#    for j in results["data"][i]:
-#        dict[i].append(str(j))
+dict={}
+for i in results["data"]:
+    dict[i] = []
+    for j in results["data"][i]:
+        dict[i].append(str(j))
         
 agregado = pd.DataFrame.from_dict(dict)
 agregado.replace("FERIADO", "0", inplace = True)
