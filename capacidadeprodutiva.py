@@ -312,7 +312,7 @@ agregado.replace("INV", "0", inplace = True)
 agregado = agregado.groupby("Linhas").sum()
 agregado.astype("float")
 st.write(agregado)
-#agregado['Horas'] = float(agregado.sum(axis=1))
+agregado['Horas'] = float(agregado.sum(axis=1))
 #agregado['Necessario'] = necess
 #agregado['HDO'] = hdo
 #agregado['Gap_Calculado'] = gap_horas
