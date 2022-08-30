@@ -232,6 +232,7 @@ for i in range(len(gap_horas)):
         if turnos[i] < turnos[index]:
             for j in range(len(cal_linhas[0])):
                 if cal_linhas[i][j] > 0 and cal_linhas[index][j] > 0 and gap_horas[index] > 0:
+                    p = cal_linhas[i][j]
                     cal_linhas[i][j] += 5*capacidade[index]/capacidade[i]
                     if cal_linhas[i][j] > 24:
                         cal_linhas[i][j] = 24
@@ -239,7 +240,7 @@ for i in range(len(gap_horas)):
                     if cal_linhas[index][j] < 0:
                         cal_linhas[index][j] = 0
                     gap_horas[index] -= 5
-                    gap_horas[i] += cal_linhas[i][j]
+                    gap_horas[i] += cal_linhas[i][j] - p
                     if gap_horas[i] >= 0:
                         break
                         
