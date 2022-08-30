@@ -280,7 +280,6 @@ for i in range(len(gap_horas)):
                     if gap_horas[i] >= 0:
                         break
     
-st.write(gap_horas)
 for i in range(0, no_linhas):
     if gap_horas[i] < 0:
         for j in range(len(cal_linhas[0])):
@@ -330,7 +329,7 @@ agregado['Gap Horas'] = agregado['Gap_Calculado'] + ((agregado['Horas'] - agrega
 agregado['Gap Dias'] = agregado['Gap Horas']/24
 agregado['Gap Horas'] = agregado['Gap Horas'].round(2)
 agregado['Gap Dias'] = agregado['Gap Dias'].round(0)
-#st.write(agregado)
+st.write(agregado)
 result_agregado = agregado[['Gap Horas', 'Gap Dias']]
 result_agregado['Linhas'] = selecao
 coluna1 = result_agregado.pop('Linhas')
