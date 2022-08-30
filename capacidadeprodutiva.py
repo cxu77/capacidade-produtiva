@@ -98,9 +98,10 @@ def desc_admpip(descontos, adm, monthnumber):
 def desc_4turnos(descontos, monthnumber):
     for i in range(len(descontos)):
         if calendar.weekday(date.today().year, monthnumber, i+1) % 7 < 5 and descontos[i] > 0 and descontos[i] !=5:
-            descontos[i] += -1
+            descontos[i] -= 1
         else:
-            descontos[i] += -2
+            descontos[i] -= 2
+    return descontos
 
 # leitura dos arquivos necessários
 url = "https://raw.githubusercontent.com/cxu77/capacidade-produtiva/main/bases-capacidade-produtiva.xlsx"
