@@ -55,7 +55,7 @@ def desc_inv(descontos, psem, monthnumber):
         if descontos[-1] > 0 and calendar.weekday(date.today().year, monthnumber, len(descontos)) % 7 != 6:
             descontos[-1] = -3
             descontos[-2] += -psem
-        elif descontos[-1] < 0 and calendar.weekday(date.today().year, monthnumber, len(descontos)) % 7 != 6:
+        elif descontos[-1] < 0 or descontos[i] == -2 and calendar.weekday(date.today().year, monthnumber, len(descontos)) % 7 != 6:
             descontos[-2] = -3
         else:
             descontos[-2] = -3
