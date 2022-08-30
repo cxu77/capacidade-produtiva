@@ -187,8 +187,8 @@ for i in range(no_linhas):
         descontos = desc_fimsem(descontos, adm_pip.iloc[:,4].values[indices[i]], horas_disponiveis[i], no_mes)
         descontos = desc_domingos(descontos, no_mes)
         descontos = desc_admpip(descontos, adm_pip.iloc[:,1].values[indices[i]], no_mes)
-    #else:
-        #descontos = desc_4turnos(descontos, no_mes)
+    else:
+        descontos = desc_4turnos(descontos, no_mes)
         
     #sum1 = np.count_nonzero(descontos == -1)
     #sum2 = 2*np.count_nonzero(descontos == -2)
