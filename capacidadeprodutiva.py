@@ -283,7 +283,7 @@ for i in range(len(gap_horas)):
 for i in range(0, no_linhas):
     if gap_horas[i] < 0:
         for j in range(len(cal_linhas[0])):
-            if cal_linhas[i][j] == 0:
+            if cal_linhas[i][j] == -4:
                 cal_linhas[i][j] = horas_disponiveis[i] - adm_pip.iloc[:,3].values[indices[i]] - adm_pip.iloc[:,2].values[indices[i]] - adm_pip.iloc[:,1].values[indices[i]]
                 gap_horas[i] += cal_linhas[i][j]
                 if gap_horas[i] >= 0:
