@@ -279,7 +279,8 @@ for i in range(len(gap_horas)):
                     gap_horas[index] -= cal_linhas[index][j]   
                     if gap_horas[i] >= 0:
                         break
-                                        
+    
+st.write(gap_horas)
 for i in range(0, no_linhas):
     if gap_horas[i] < 0:
         for j in range(len(cal_linhas[0])):
